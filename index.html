@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fleurs & Co – Vente de bouquets à Dakar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    :root {
+      --bg: #f8f5f2;
+      --accent: #e67e5f;
+      --text: #333;
+      --title: #222;
+      --card-bg: #fff;
+      --border: #e0dedb;
+      --shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .burger {
+      display: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      padding: 0 1.5rem;
+      background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.95)), url("https://placehold.co/1600x900/eedfdf/9c7a64?text=Bouquets") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      padding: 2rem 0;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      color: var(--title);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      max-width: 550px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #d66c4c;
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--title);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    /* About */
+    .about {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 15px var(--shadow);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .about-text {
+      font-size: 1rem;
+    }
+
+    /* Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      color: var(--title);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 6px 15px var(--shadow);
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 240px;
+      background: #e6e6e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 1rem;
+    }
+    .gallery-caption {
+      padding: 0.8rem 1rem;
+      background: white;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* Contact */
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .contact p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      background: #fafafa;
+      font-size: 0.9rem;
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .burger {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding-top: 3rem;
+        transition: right 0.4s ease;
+        z-index: 99;
+      }
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .about-content,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero {
+        background-position: top;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="#hero" class="logo">Fleurs & Co</a>
+      <ul class="nav-links" id="navLinks">
+        ><a href="#hero">Accueil</a></li>
+        ><a href="#about">À propos</a></li>
+        ><a href="#services">Services</a></li>
+        ><a href="#gallery">Galerie</a></li>
+        ><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="burger" id="burger">☰</div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>
+        Bouquets frais, <span>façon maison</span> à Dakar
+      </h1>
+      <p>
+        Livraison de bouquets de fleurs de saison, créations personnalisées pour mariages, anniversaires et événements. 
+        Dites ce que vous ressentez avec un bouquet choisi avec soin.
+      </p>
+      <a href="#contact" class="btn">Commander un bouquet</a>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="about">
+    <h2>À propos de Fleurs & Co</h2>
+    <div class="about">
+      <div class="about-content">
+        <div>
+          <p>
+            Fleurs & Co est une petite boutique de fleurs artisanale située à Dakar. 
+            Nous sélectionnons chaque fleur avec soin, pour des bouquets authentiques et durables.
+          </p>
+          <p>
+            Que ce soit pour un simple petit cadeau ou pour une grande réception, nous créons des compositions 
+            qui racontent une histoire et reflètent vos émotions.
+          </p>
+        </div>
+        <div>
+          <p>
+            Nous travaillons avec des producteurs locaux autant que possible, 
+            pour des bouquets frais, colorés et respectueux de la terre.
+            N’hésitez pas à nous contacter pour un devis personnalisé.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <h2>Nos services</h2>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">💐</div>
+        <h3>Bouquets du jour</h3>
+        <p>
+          Bouquets frais préparés chaque matin à partir de fleurs de saison. 
+          Idéal pour un petit cadeau ou une maison qui manque de couleur.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎀</div>
+        <h3>Événements & Mariages</h3>
+        <p>
+          Décoration complète pour mariages, baptêmes, anniversaires et événements d’entreprise. 
+          Nous créons un univers floral autour de votre thème.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🚚</div>
+        <h3>Livraison express</h3>
+        <p>
+          Livraison de bouquets à Dakar et environs dans la journée. 
+          Choisissez votre plage horaire pour une livraison discrète ou surprise.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section id="gallery">
+    <h2>Galerie de bouquets</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <div class="gallery-image">
+          Bouquet romantique – Roses & pivoines
+        </div>
+        <div class="gallery-caption">
+          Bouquet romantique – Roses rouges et pivoines blanches
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-image">
+          Bouquet de mariée
+        </div>
+        <div class="gallery-caption">
+          Bouquet de mariée – thème naturel et champêtre
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-image">
+          Décoration de table
+        </div>
+        <div class="gallery-caption">
+          Centres de table colorés pour un mariage
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <div>
+        <p>
+          Envoyez‑nous un message avec :
+          la date de livraison, le type de bouquet (romantique, festif, funéraire, etc.) 
+          et vos préférences de couleurs.
+        </p>
+        <p>
+          Téléphone : +221 77 000 00 00<br />
+          Localisation : Dakar, Sénégal
+        </p>
+      </div>
+      <div>
+        <form id="contactForm">
+          <div class="form-group">
+            abel for="name">Nom</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            abel for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            abel for="phone">Téléphone</label>
+            <input type="text" id="phone" name="phone" required />
+          </div>
+          <div class="form-group">
+            abel for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Fleurs & Co – Boutique de fleurs à Dakar</p>
+  </footer>
+
+  <!-- JS (menu burger + scroll + formulaire) -->
+  <script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('navLinks');
+
+    burger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          if (navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+          }
+        }
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Message envoyé ! Nous vous recontacterons rapidement pour discuter de votre bouquet.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
